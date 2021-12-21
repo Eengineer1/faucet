@@ -28,9 +28,9 @@ func main() {
 		chaincmd.WithKeyringBackend(configKeyringBackend),
 		chaincmd.WithAutoChainIDDetection(),
 		chaincmd.WithNodeAddress(nodeAddress),
-		chaincmd.WithGas(gas),
-		chaincmd.WithGasPrices(gasPrices),
-		chaincmd.WithGasAdjustment(gasAdjustment),
+		chaincmd.WithGasCommand(gas),
+		chaincmd.WithGasPricesCommand(gasPrices),
+		chaincmd.WithGasAdjustmentCommand(gasAdjustment),
 	}
 
 	if legacySendCmd {
@@ -39,11 +39,11 @@ func main() {
 
 	if sdkVersion == string(cosmosver.Stargate) {
 		ccoptions = append(ccoptions,
-			chaincmd.WithVersion(cosmosver.StargateZeroFourtyAndAbove),
+			chaincmd.WithVersion(cosmosver.StargateFortyFourVersion),
 		)
 	} else {
 		ccoptions = append(ccoptions,
-			chaincmd.WithVersion(cosmosver.LaunchpadAny),
+			chaincmd.WithVersion(cosmosver.Latest),
 			chaincmd.WithLaunchpadCLI(appCli),
 		)
 	}
@@ -60,7 +60,7 @@ func main() {
 		faucetOptions[i] = cosmosfaucet.Coin(creditAmount, maxCredit, coin)
 	}
 
-	faucetOptions = append(faucetOptions, cosmosfaucet.Account(keyName, keyMnemonic))
+	faucetOptions = append(faucetOptions, cosmosfaucet.Account(keyName, keyMnemonic, ""))
 
 	faucet, err := cosmosfaucet.New(context.Background(), cr, faucetOptions...)
 	if err != nil {
