@@ -28,6 +28,9 @@ func main() {
 		chaincmd.WithKeyringBackend(configKeyringBackend),
 		chaincmd.WithAutoChainIDDetection(),
 		chaincmd.WithNodeAddress(nodeAddress),
+		chaincmd.WithGas(gas),
+		chaincmd.WithGasPrices(gasPrices),
+		chaincmd.WithGasAdjustment(gasAdjustment),
 	}
 
 	if legacySendCmd {

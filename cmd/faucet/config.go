@@ -25,6 +25,9 @@ var (
 	maxCredit       uint64
 	nodeAddress     string
 	legacySendCmd   bool
+	gasPrices		string
+	gas				string
+	gasAdjustment	string
 )
 
 func init() {
@@ -76,5 +79,17 @@ func init() {
 	flag.BoolVar(&legacySendCmd, "legacy-send",
 		environ.GetBool("LEGACY_SEND", false),
 		"whether to use legacy send command",
+	)
+	flag.StringVar(&gasPrices, "gas-prices",
+		environ.GetString("GAS_PRICES", ""),
+		"explicitly set gas prices on the binary",
+	)
+	flag.StringVar(&gas, "gas",
+		environ.GetString("GAS", ""),
+		"explicitly set gas mode on the binary",
+	)
+	flag.StringVar(&gasAdjustment, "gas-adjustment",
+		environ.GetString("GAS_ADJUSTMENT", ""),
+		"explicitly set gas adjustment on the binary",
 	)
 }
